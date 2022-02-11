@@ -76,3 +76,14 @@ a {
     display: flex;
     justify-content: center;
 }
+
+.round-display {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#round {
+    display: flex;
+    justify-content: center;
+}

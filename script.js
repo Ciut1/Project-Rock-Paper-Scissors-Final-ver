@@ -18,48 +18,84 @@ function playRound(playerSelection) {
     console.log(isWinner(playerSelection, computerSelection))
 }
 
-
-let playerScoreDisplay = document.getElementById("player-score")
-let computerScoreDisplay = document.getElementById("computer-score")
-
 let playerScore = 0
 let computerScore = 0
+let roundNumber = 0
 
 const resultDisplay = document.getElementById("result")
+const roundDisplay = document.getElementById("round")
 function isWinner(playerSelection, computerSelection) {
     if (playerSelection === "rock") {
         if (computerSelection === "rock") {
             resultDisplay.innerHTML = "It's a draw!";
+            roundNumber++
         } else if (computerSelection === "paper") {
             resultDisplay.innerHTML = "You Lose! Paper beats Rock";
-            computerScoreDisplay.innerHTML = computerScore++;
+            computerScore++;
+            roundNumber++
         } else {
             resultDisplay.innerHTML = "You win! Rock beats Scissor"
-            playerScoreDisplay.innerHTML = playerScore++
+            playerScore++
+            roundNumber++
         }
     }
 
     if (playerSelection === "paper") {
         if (computerSelection === "rock") {
             resultDisplay.innerHTML = "You win! Paper beats Rock";
-            playerScoreDisplay.innerHTML = playerScore++
+            playerScore++
+            roundNumber++
         } else if (computerSelection === "paper") {
             resultDisplay.innerHTML = "It's a draw!";
+            roundNumber++
         } else {
             resultDisplay.innerHTML = "You lose! Scissor beats Paper"
-            computerScoreDisplay.innerHTML = computerScore++
+            computerScore++
+            roundNumber++
         }
     }
 
     if (playerSelection === "scissor") {
         if (computerSelection === "rock") {
             resultDisplay.innerHTML = "You lose! Rock beats Scissor";
-            computerScoreDisplay.innerHTML = computerScore++
+            computerScore++
+            roundNumber++
         } else if (computerSelection === "paper") {
             resultDisplay.innerHTML = "You win! Scissor beats Paper";
-            playerScoreDisplay.innerHTML = playerScore++
+            playerScore++
+            roundNumber++
         } else {
             resultDisplay.innerHTML = "It's a draw!"
+            roundNumber++
         }
+    }
+
+    updateScore()
+    checkWinner()
+
+}
+
+function updateScore() {
+    document.getElementById("player-score").textContent = playerScore
+    document.getElementById("computer-score").textContent = computerScore
+    document.getElementById("round").textContent = roundNumber
+}
+
+function checkWinner() {
+    if (playerScore === 5 || computerScore === 5) {
+        if (playerScore === 5) {
+            alert("Congratulations! You win the game!")
+        } else if (computerScore === 5) {
+            alert("You lose! Try again!")
+        }
+    }
+    resetGame()
+}
+
+function resetGame() {
+    if (playerScore === 5 || computerScore === 5) {
+        playerScore = 0;
+        computerScore = 0;
+        roundNumber = 0;
     }
 }
